@@ -1,0 +1,15 @@
+services:
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - "./default.conf:/etc/nginx/conf.d/default.conf:ro"
+    ports:
+      - 8080:80
+    links:
+      - "jupyterlab"
+
+  jupyterlab:
+    image: jupyter/minimal-notebook:latest
+    container_name: jupyterlab
+    volumes:
+      - "./jupyter_server_config.py:/home/jovyan/.jupyter/jupyter_server_config.py:ro"
